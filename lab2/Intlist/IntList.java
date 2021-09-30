@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Formatter;
 
 /**
@@ -81,7 +82,17 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A == null){
+            return B;
+        }
+        else {
+            IntList tmp = A;
+            while (tmp.rest != null) {
+                tmp = tmp.rest;
+            }
+            tmp.rest = B;
+            return A;
+        }
     }
 
     /**
@@ -90,7 +101,11 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(A == null){
+            return B;
+        }
+        return new IntList(A.first,catenate(A.rest,B));
+
     }
 
 
@@ -131,6 +146,7 @@ public class IntList {
      * as THIS. Cannot handle IntLists with cycles. You are not expected to
      * read or understand this method.
      */
+    @Override
     public boolean equals(Object x) {
         if (!(x instanceof IntList)) {
             return false;
@@ -165,26 +181,29 @@ public class IntList {
         IntList tortoise = A;
         IntList hare = A;
 
-        if (A == null)
+        if (A == null){
             return 0;
+        }
 
         int cnt = 0;
 
 
         while (true) {
             cnt++;
-            if (hare.rest != null)
-                hare = hare.rest.rest;
-            else
-                return 0;
+            if (hare.rest != null){
+                hare = hare.rest.rest;}
+            else{
+                return 0;}
 
             tortoise = tortoise.rest;
 
-            if (tortoise == null || hare == null)
+            if (tortoise == null || hare == null){
                 return 0;
+            }
 
-            if (hare == tortoise)
+            if (hare == tortoise){
                 return cnt;
+            }
         }
     }
 
